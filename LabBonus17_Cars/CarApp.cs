@@ -16,7 +16,11 @@ namespace LabBonus17_Cars
                 "How many vehicles would you like to add? ");
 
             NumberOfCars = Console.ReadLine();
-            //validate input
+            while (Validator.CheckNumberOfCars(NumberOfCars) == false)
+            {
+                Console.WriteLine("Please enter a valid number of vehicles.");
+                NumberOfCars = Console.ReadLine();
+            }
 
             Car[] Inventory = new Car[int.Parse(NumberOfCars)];
 
@@ -25,20 +29,40 @@ namespace LabBonus17_Cars
                 Inventory[i] = new Car();
 
                 Console.Write($"Vehicle [{i + 1}] make: ");
-                //validate input
-                Inventory[i].Make = Console.ReadLine();
+                string MakeInput = Console.ReadLine();
+                while (Validator.CheckBlankInput(MakeInput) == false)
+                {
+                    Console.WriteLine("Please enter a valid make.");
+                    MakeInput = Console.ReadLine();
+                }
+                Inventory[i].Make = MakeInput;
 
                 Console.Write($"Vehicle [{i + 1}] model: ");
-                //validate input
-                Inventory[i].Model = Console.ReadLine();
+                string ModelInput = Console.ReadLine();
+                while(Validator.CheckBlankInput(ModelInput) == false)
+                {
+                    Console.WriteLine("Please enter a valid model.");
+                    ModelInput = Console.ReadLine();
+                }
+                Inventory[i].Model = ModelInput;
 
                 Console.Write($"Vehicle [{i + 1}] model year: ");
-                //validate year
-                Inventory[i].Year = int.Parse(Console.ReadLine());
+                string YearInput = Console.ReadLine();
+                while(Validator.CheckYear(YearInput) == false)
+                {
+                    Console.WriteLine("Not a valid model year. Please try again.");
+                    YearInput = Console.ReadLine();
+                }
+                Inventory[i].Year = int.Parse(YearInput);
 
                 Console.Write($"Vehicle [{i + 1}] price: ");
-                //validate price
-                Inventory[i].Price = double.Parse(Console.ReadLine());
+                string PriceInput = Console.ReadLine();
+                while (Validator.CheckPrice(PriceInput) == false)
+                {
+                    Console.WriteLine("Please enter a valid price.");
+                    PriceInput = Console.ReadLine();
+                }
+                Inventory[i].Price = double.Parse(PriceInput);
             }
 
             Console.WriteLine(new string('*',50));
@@ -49,7 +73,7 @@ namespace LabBonus17_Cars
 
             foreach (Car c in Inventory)
             {
-                Console.WriteLine($"{c.Make,-10}{c.Model,-10}{c.Year,-10}{c.Price,-10}");
+                Console.WriteLine(c.ToString());
             }
         }
     }

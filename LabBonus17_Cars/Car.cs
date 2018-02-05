@@ -48,11 +48,15 @@ namespace LabBonus17_Cars
             Price = price;
         }
 
-        //method overloading (note same name as above)
-        //this is creating default objects
         public Car() : this("Make Unknown", "Model Unknown", 0000, 0000)
         {
 
+        }
+
+        //methods
+        public override string ToString()
+        {
+            return ($"{Make,-10}{Model,-10}{Year,-10}{Price.ToString("C0"),-10}");
         }
     }
 }
